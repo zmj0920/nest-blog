@@ -35,7 +35,7 @@ const Home = (articleList) => {
               itemLayout="vertical"
               dataSource={mylist}
               renderItem={item => (
-                <List.Item>
+                <List.Item key={item.article_id}>
                   <div className="list-title">
                     <Link href={{ pathname: '/detailed', query: { id: item.article_id } }}>
                       <a>{item.article_title}</a>

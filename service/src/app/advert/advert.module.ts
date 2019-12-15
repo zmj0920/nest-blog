@@ -9,4 +9,4 @@ import { Advert } from '../entities/advert.entity';
     providers: [AdvertService],
     controllers: [AdvertController],
 })
-export class UserModule {}
+export class AdvertModule {}

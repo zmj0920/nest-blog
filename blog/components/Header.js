@@ -6,7 +6,7 @@ import { Row, Col, Menu, Icon } from 'antd'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
 
-const Header = ({ stars }) => {
+const Header = () => {
     const [navArray, setNavArray] = useState([])
     useEffect(() => {
         const fetchData = async () => {
@@ -42,7 +42,7 @@ const Header = ({ stars }) => {
                         </Link>
 
                     </span>
-                    <span className="header-txt">专注前端开发,每年100集免费视频。{stars}</span>
+                    <span className="header-txt">专注前端开发,每年100集免费视频.</span>
                 </Col>
 
                 <Col className="memu-div" xs={0} sm={0} md={14} lg={10} xl={7}>

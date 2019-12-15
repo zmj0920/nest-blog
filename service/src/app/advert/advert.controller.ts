@@ -7,4 +7,8 @@ import { Advert } from '../entities/advert.entity';
 export class AdvertController {
     constructor(private readonly advertService: AdvertService) { }
   
+    @Get('find')
+    async find(): Promise<Object> {
+        return await this.advertService.find();
+    }
 }

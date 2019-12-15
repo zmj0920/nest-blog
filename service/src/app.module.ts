@@ -4,6 +4,7 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 import {UserModule} from './app/user/user.module';
 import {ArticleModule} from './app/article/article.module';
 import {ArticleTypeModule} from './app/articletype/articletype.module';
+import {AdvertModule} from './app/advert/advert.module';
 import * as path from 'path';
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import * as path from 'path';
     }),
       UserModule,
       ArticleModule,
-      ArticleTypeModule
+      ArticleTypeModule,
+      AdvertModule
 ],
   controllers: [],
   providers: [],

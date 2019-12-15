@@ -7,7 +7,7 @@ const Author = () => {
         <div className="author-div comm-box">
             <div> <Avatar size={100} src="../static/img/16cfa3238800341b.png" /></div>
             <div className="author-introduction">
-                <div class="author-name">君吟</div>
+                <div className="author-name">君吟</div>
                 <div>   前端自由写手，WEB和移动前端开发</div>
                 <div className="author-tag">
                     <Tag color="green">JavaScript</Tag>
