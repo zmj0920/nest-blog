@@ -1,18 +1,17 @@
-import React, { useState } from 'react'
 import Head from 'next/head'
 import { Row, Col, Affix, Icon, Breadcrumb, BackTop } from 'antd'
 import Header from '../components/Header'
 import Author from '../components/Author'
 import Advert from '../components/Advert'
 import Footer from '../components/Footer'
-import '../static/style/pages/detailed.css'
 import servicePath from '../config/apiUrl'
 import axios from 'axios'
 import marked from 'marked'
 import hljs from 'highlightjs';
-import 'highlightjs/styles/monokai-sublime.css';
 import dayjs from 'dayjs'
 import Tocify from '../components/tocify.tsx'
+import 'highlightjs/styles/monokai-sublime.css';
+import '../static/style/pages/detailed.css'
 const Detailed = (props) => {
   const tocify = new Tocify()
   const renderer = new marked.Renderer();
