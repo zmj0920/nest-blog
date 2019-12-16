@@ -8,6 +8,10 @@ import { ApiTags, ApiHeader, ApiCreatedResponse } from '@nestjs/swagger';
     description: 'Auth token',
   })
 @ApiTags('用户')
+@ApiCreatedResponse({
+    description: 'The record has been successfully created.',
+    type: User,
+})
 @Controller('user')
 export class UserController {
     constructor(private readonly userService: UserService) { }
@@ -35,10 +39,7 @@ export class UserController {
     }
 
     @Get('create')
-    @ApiCreatedResponse({
-        description: 'The record has been successfully created.',
-        type: User,
-      })
+
     async create(): Promise<string> {
         // tslint:disable-next-line:no-console
         console.log('1323');

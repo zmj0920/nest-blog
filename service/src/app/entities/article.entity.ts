@@ -7,6 +7,7 @@ import { ApiProperty } from '@nestjs/swagger';
 })
 
 export class Article {
+
     // 编号
     @ApiProperty()
     @PrimaryGeneratedColumn({ type: "int" })
@@ -15,18 +16,22 @@ export class Article {
     // @Column({ type: "int" })
     // @ApiProperty()
     // typeId: number;
+
     // 文章标题
     @ApiProperty()
     @Column({ type: "text" })
     title: string;
+
     // 文章内容
     @ApiProperty()
     @Column({ type: "longtext" })
     articleContent: string;
+
     // 文章介绍
     @ApiProperty()
     @Column({ type: "text" })
     introduce: string;
+
     // 添加时间
     @ApiProperty()
     @Column({ type: "datetime" })
@@ -36,11 +41,14 @@ export class Article {
     @ApiProperty()
     @Column({ type: "int" })
     viewCount: number;
+
     // 文章类别
+    @ApiProperty()
     @ManyToOne(type => ArticleType, articleType => articleType.articles, { cascade: true })
     @JoinTable()
     articleType: ArticleType;
 
+    @ApiProperty()
     @ManyToOne(type => User, user => user.articles, { cascade: true })
     @JoinTable()
     user: User;

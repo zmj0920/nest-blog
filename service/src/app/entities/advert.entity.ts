@@ -6,14 +6,17 @@ import { ApiProperty } from '@nestjs/swagger';
 })
 
 export class Advert {
+
     // 编号
     @ApiProperty()
     @PrimaryGeneratedColumn()
     id: number;
+
     // 广告链接
-    @Column()
     @ApiProperty()
+    @Column()
     url: string;
+    
     // 图片链接
     @ApiProperty()
     @Column()
