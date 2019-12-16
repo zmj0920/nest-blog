@@ -1,4 +1,4 @@
-import { Get, Controller, Post, Response, Param, HttpStatus, Request, Body } from '@nestjs/common';
+import { Get, Controller, Post, Response, Param, HttpStatus, Request, Body, Headers, Req } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from '../entities/user.entity';
 import { ApiTags, ApiHeader, ApiCreatedResponse } from '@nestjs/swagger';
@@ -6,7 +6,7 @@ import { ApiTags, ApiHeader, ApiCreatedResponse } from '@nestjs/swagger';
 @ApiHeader({
     name: 'Authorization',
     description: 'Auth token',
-  })
+})
 @ApiTags('用户')
 @ApiCreatedResponse({
     description: 'The record has been successfully created.',
@@ -21,6 +21,14 @@ export class UserController {
         // tslint:disable-next-line:no-console
         return this.userService.root();
     }
+
+
+    @Get('root2')
+    root2(@Headers() Headers, @Req() req: Request): Object {
+        console.log(req.headers['authorization'])
+        return Headers['authorization']
+    }
+
 
     @Get('findOne/:name')
     async findOne(@Param() params): Promise<User> {
@@ -38,24 +46,15 @@ export class UserController {
         return await this.userService.find();
     }
 
-    @Get('create')
-
-    async create(): Promise<string> {
-        // tslint:disable-next-line:no-console
-        console.log('1323');
-        return this.userService.create();
+    @Post('create')
+    async create(@Body() body): Promise<User|User[]> {
+        const user = new User();
+        user.name = body.name
+        user.pwd = body.pwd
+        user.gender = body.gender
+        user.avatar = body.avatar
+        user.phone=body.phone
+        return await this.userService.create(user);
     }
-    // get
-    // http://localhost:4000/users?age=10&name=hello
-    // http://localhost:4000/users/2
-    // @Post('/add')
-    // addUser1(@Response() res, @Body() user) {
-    //   console.log(user);
-    //   res.status(HttpStatus.CREATED).json({})
-    // }
-    // @Post()
-    // addUser(@Response() res, @Request() req) {
-    //     console.log(req.body, '///')
 
-    // }
 }

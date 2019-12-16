@@ -27,23 +27,19 @@ export class UserService {
     }
 
 
-    async create(): Promise<string> {
-        const employee = new User();
-        return this.userRepository.save(employee)
-            .then(res => {
-                return 'create employee ...done';
-            })
-            .catch(err => {
-                return err;
-            });
+    async create(data: User): Promise<User|User[]> {
+        return await this.userRepository.save(
+            await this.userRepository.create(data)
+        );
     }
 
+
     async find(): Promise<User[]> {
-        // return await this.employeeRepository.findOne({ name });
+       
         return this.userRepository.find();
     }
     async findOne(name: string): Promise<User> {
-        // return await this.employeeRepository.findOne({ name });
+     
         return this.userRepository.findOne({ name });
     }
 }
