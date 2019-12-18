@@ -1,7 +1,7 @@
 import React from 'react';
 import Editor from 'for-editor';
 import { connect } from 'dva';
-import { Layout, Button, message } from 'antd';
+import { Layout, Button, message, Row, Col } from 'antd';
 import BaseComponent from 'components/BaseComponent';
 import Panel from 'components/Panel';
 import Form from 'components/Form';
@@ -73,86 +73,62 @@ export default class extends BaseComponent {
     return (
       <Layout className="full-layout page">
         <Content>
-          <Panel title="富文本">
-            <div style={{
-              marginTop: "10px",
-              marginBottom: "10px"
-            }}>
-              {/* <Button.Group >
-                <Button
-                  type="primary"
-                >
-                  设置值
-                </Button>
-                <Button onClick={this.getValue}>
-                  保存
-                </Button>
-                <Button onClick={this.clearValue}>
-                  清空值
-                </Button>
-              </Button.Group> */}
+          <Row gutter={20}>
+            <Col span={24}>
+              <Panel title="添加文章">
+                <Form columns={columns1} onSubmit={this.onSubmit} />
+              </Panel>
+            </Col>
+          </Row>
 
-              <Form columns={columns1} onSubmit={this.onSubmit} />
-
-
-              {/* <Form
-                ref={node => this.customBtnForm = node}
-                columns={columns1}
-                type="inline"
-                footer={
-                  <Button
-                    style={{ display: 'inline', margin: '10 auto' }}
-                 
-                    onClick={e => {
-                      const form = this.customBtnForm;
-                      form.validateFields((err, values) => {
-                        if (!err) {
-                          console.log('自定义提交:', values)
-                        }
-                      });
-                    }}
-                  >
-                    注册
-                    </Button>
-                }
-              /> */}
-            </div>
-            {/* <Editor
-              ref={this.$vm}
-              value={value}
-              onSave={value => this.handleSave(value)}
-              addImg={($file) => this.addImg($file)}
-              onChange={value => this.handleChange(value)}
-            /> */}
-
-            {this.state.mobile && (
-              <Editor
-                ref={this.$vm}
-                height="500px"
-                toolbar={{
-                  h1: true,
-                  h2: true,
-                  h3: true,
-                  save: true,
-                  preview: true
-                }}
-                value={value}
-                subfield={false}
-                onChange={value => this.handleChange(value)}
-                onSave={value => this.handleSave(value)}
-              />
-            )}
-            {!this.state.mobile && (
-              <Editor
-                ref={this.$vm}
-                height="700px"
-                value={value}
-                addImg={($file) => this.addImg($file)}
-                onChange={value => this.handleChange(value)}
-                onSave={value => this.handleSave(value)}
-              />
-            )}
-          </Panel>
+          <Row >
+            {/* <Panel title=""> */}
+              {this.state.mobile && (
+                <Editor
+                  ref={this.$vm}
+                  height="500px"
+                  toolbar={{
+                    h1: true,
+                    h2: true,
+                    h3: true,
+                    save: true,
+                    preview: true
+                  }}
+                  value={value}
+                  subfield={false}
+                  onChange={value => this.handleChange(value)}
+                  onSave={value => this.handleSave(value)}
+                />
+              )}
+              {!this.state.mobile && (
+                <Editor
+                  ref={this.$vm}
+                  height="700px"
+                  toolbar={{
+                    h1: true, // h1
+                    h2: true, // h2
+                    h3: true, // h3
+                    h4: true, // h4
+                    img: true, // 图片
+                    link: true, // 链接
+                    code: true, // 代码块
+                    preview: true, // 预览
+                    expand: true, // 全屏
+                    /* v0.0.9 */
+                    undo: true, // 撤销
+                    redo: true, // 重做
+                    // save: true, // 保存
+                    /* v0.2.3 */
+                    subfield: true, // 单双栏模式
+                  }}
+                  value={value}
+                  addImg={($file) => this.addImg($file)}
+                  onChange={value => this.handleChange(value)}
+                  onSave={value => this.handleSave(value)}
+                />
+              )}
+            {/* </Panel> */}
+          </Row>
         </Content>
       </Layout>
     )
