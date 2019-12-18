@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
-import { Row, Col, List, Icon, Breadcrumb } from 'antd'
+import { withRouter } from 'next/router'
+import { Row, Col, List, Icon, Breadcrumb ,Pagination} from 'antd'
 import Header from '../components/Header'
 import Author from '../components/Author'
 import Advert from '../components/Advert'
@@ -11,12 +12,40 @@ import servicePath from '../config/apiUrl'
 import Link from 'next/link'
 import dayjs from 'dayjs'
 
-const myList = (articleList) => {
+const myList = ({ router }) => {
+  console.log(router.query.id)
+  const [mylist, setMylist] = useState([]);
+  const [pageNum, setpageNum] = useState(1);
+  const [pageSize, setpageSize] = useState(10);
+  const [total, setTotal] = useState(0);
+  const [titleType, setTitle] = useState('');
+  const getArticleLimit = (pageNum, pageSize) => {
+    axios(`${servicePath.getListById}${router.query.id}/${pageNum}/${pageSize}`).then(
+      res => {
+        if (res.data.success === 200) {
+          console.log(res)
+          setTitle(res.data.data[0].article_type_typeName)
+          setMylist(res.data.data)
+          setTotal(res.data.total)
+        }
+      }
+    )
+  }
 
-  const [mylist, setMylist] = useState(articleList.data);
   useEffect(() => {
-    setMylist(articleList.data)
-  })
+    getArticleLimit(pageNum, pageSize)
+  }, [])
+
+  const onShowSizeChange = (current, pageSize) => {
+    setpageSize(pageSize)
+  }
+  const onChange = (pageNum, pageSize) => {
+    if (pageNum) {
+      getArticleLimit(pageNum, pageSize)
+    }
+  };
+
+
   return (
     <>
       <Head>
@@ -29,7 +58,7 @@ const myList = (articleList) => {
             <div className="bread-div">
               <Breadcrumb>
                 <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
-                <Breadcrumb.Item>{mylist[0].article_type_typeName}</Breadcrumb.Item>
+                <Breadcrumb.Item>{titleType}</Breadcrumb.Item>
               </Breadcrumb>
             </div>
 
@@ -54,7 +83,16 @@ const myList = (articleList) => {
                 </List.Item>
               )}
             />
-
+          </div>
+          <div className="pagination-page">
+            <Pagination
+              showSizeChanger
+              onShowSizeChange={onShowSizeChange}
+              defaultCurrent={pageNum}
+              pageSize={pageSize}
+              onChange={onChange}
+              total={total}
+            />
           </div>
         </Col>
 
@@ -70,14 +108,14 @@ const myList = (articleList) => {
 
 }
 
-myList.getInitialProps = async (context) => {
-  let id = context.query.id
-  const articleList = new Promise((resolve) => {
-    axios(servicePath.getListById + id).then(
-      (res) => resolve(res.data)
-    )
-  })
-  return await articleList
-}
-export default myList
+// myList.getInitialProps = async (context) => {
+//   let id = context.query.id
+//   const articleList = new Promise((resolve) => {
+//     axios(servicePath.getListById + id).then(
+//       (res) => resolve(res.data)
+//     )
+//   })
+//   return await articleList
+// }
+export default withRouter(myList)
 

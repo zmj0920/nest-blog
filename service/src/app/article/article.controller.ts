@@ -26,8 +26,8 @@ export class ArticleController {
     return  await this.articleService.findOne(params.id);
   }
 
-  @Get('findTypeOne/:id')
+  @Get('findTypeOne/:id/:pageNum/:pageSize')
   async findTypeOne(@Param() params): Promise<Object> {
-    return  await this.articleService.findTypeOne(params.id);
+    return  await this.articleService.findTypeOne(params.id,params.pageNum,params.pageSize);
   }
 }

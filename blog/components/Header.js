@@ -28,7 +28,12 @@ const Header = () => {
         if (e.key == 0) {
             Router.push('/index')
         } else {
-            Router.push('/myList?id=' + e.key)
+            Router.push({
+                pathname: '/myList',
+                query: {
+                    id: e.key
+                }
+            })
         }
     }
 

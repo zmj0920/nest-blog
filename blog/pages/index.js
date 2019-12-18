@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Row, Col, List, Icon, BackTop, Affix } from 'antd'
+import { Row, Col, List, Icon, BackTop, Affix, Pagination } from 'antd'
 import Header from '../components/Header'
 import Author from '../components/Author'
 import '../static/style/pages/index.css'
@@ -11,15 +11,35 @@ import servicePath from '../config/apiUrl'
 import axios from 'axios'
 import dayjs from 'dayjs'
 
+const Home = () => {
+  const [mylist, setMylist] = useState([]);
+  const [pageNum, setpageNum] = useState(1);
+  const [pageSize, setpageSize] = useState(10);
+  const [total, setTotal] = useState(0);
 
+  const getArticleLimit = (pageNum, pageSize) => {
+    axios(`${servicePath.getArticleLimit}${pageNum}/${pageSize}`).then(
+      res => {
+        if (res.data.success === 200) {
+          setMylist(res.data.data)
+          setTotal(res.data.total)
+        }
+      }
+    )
+  }
 
-const Home = (articleList) => {
-  //---------主要代码-------------start
-  //const [mylist, setMylist] = useState(list.data);
+  useEffect(() => {
+    getArticleLimit(pageNum, pageSize)
+  }, [])
 
-  const [mylist, setMylist] = useState(articleList.data);
-  // console.log(articleList.data)
-  //---------主要代码-------------end
+  const onShowSizeChange = (current, pageSize) => {
+    setpageSize(pageSize)
+  }
+  const onChange = (pageNum, pageSize) => {
+    if (pageNum) {
+      getArticleLimit(pageNum, pageSize)
+    }
+  };
   return (
     <>
       <Head>
@@ -29,7 +49,6 @@ const Home = (articleList) => {
       <Row className="comm-main" type="flex" justify="center">
         <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={15}  >
           <div>
-
             <List
               header={<div>最新日志</div>}
               itemLayout="vertical"
@@ -51,7 +70,16 @@ const Home = (articleList) => {
                 </List.Item>
               )}
             />
-
+          </div>
+          <div className="pagination-page">
+            <Pagination
+              showSizeChanger
+              onShowSizeChange={onShowSizeChange}
+              defaultCurrent={pageNum}
+              pageSize={pageSize}
+              onChange={onChange}
+              total={total}
+            />
           </div>
         </Col>
 
@@ -63,7 +91,7 @@ const Home = (articleList) => {
         </Col>
         <BackTop />
       </Row>
-     
+
       <Footer />
 
     </>
@@ -71,18 +99,18 @@ const Home = (articleList) => {
 
 }
 
-Home.getInitialProps = async () => {
- 
-  const articleList = new Promise((resolve) => {
-    axios(servicePath.getArticleList).then(
-      (res) => {
-        resolve(res.data)
-      }
-    )
-  })
+// Home.getInitialProps = async () => {
 
-  return await articleList
-}
+//   const articleList = new Promise((resolve) => {
+//     axios(servicePath.getArticleList).then(
+//       (res) => {
+//         resolve(res.data)
+//       }
+//     )
+//   })
+
+//   return await articleList
+// }
 
 
 export default Home
