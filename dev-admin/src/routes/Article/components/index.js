@@ -85,11 +85,15 @@ export default class extends BaseComponent {
                   ref={this.$vm}
                   height="500px"
                   toolbar={{
-                    h1: true,
-                    h2: true,
-                    h3: true,
-                    save: true,
-                    preview: true
+                    h1: true, // h1
+                    h2: true, // h2
+                    h3: true, // h3
+                    h4: true, // h4
+                    img: true, // 图片
+                    preview: true, // 预览
+                    /* v0.0.9 */
+                    undo: true, // 撤销
+                    redo: true, // 重做
                   }}
                   value={value}
                   subfield={false}
