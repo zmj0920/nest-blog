@@ -19,7 +19,7 @@ export default (self) => [
                     message: '文章标题'
                 }
             ],
-            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl:{span:"8"} },
+            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "8" }, xxl:{span:"8"} },
         }
     },
     {
@@ -34,7 +34,7 @@ export default (self) => [
                     message: '文章类型'
                 }
             ],
-            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl: { span: "8" } },
+            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "8" }, xxl: { span: "8" } },
         }
     },
     // {
@@ -44,7 +44,7 @@ export default (self) => [
     //         type: 'datetime',
     //         showTime: true,
     //         initialValue: moment(),
-    //         col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl: { span: "6" } },
+    //         col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "8" }, xxl: { span: "6" } },
     //     }
     // },
 
@@ -53,7 +53,7 @@ export default (self) => [
         name: 'ordder',
         formItem: {
             type: 'number',
-            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl: { span: "8" } },
+            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "8" }, xxl: { span: "8" } },
         }
     },
     {

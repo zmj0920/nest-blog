@@ -15,7 +15,10 @@ export class ArticleService {
             .leftJoinAndSelect(ArticleType, 'article_type', 'article.articleTypeId=article_type.id')
             .leftJoinAndSelect(User, 'user', 'article.userId=user.id')
             .select(["article.id", "article.title", "article.introduce", "article.addTime", "article.viewCount",
-                "article_type.typeName", "user.name"])
+                "article_type.typeName", "user.name"]).orderBy({
+                    "article.sortNumber": "DESC",
+                    "article.id": "DESC"
+                })
             .getRawMany()
         return { success: 200, total: 100, pageNum: 10, pageSize: 20, data: article };
     }

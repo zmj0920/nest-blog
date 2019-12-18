@@ -42,6 +42,11 @@ export class Article {
     @Column({ type: "int" })
     viewCount: number;
 
+     // 排序
+     @ApiProperty()
+     @Column({ type: "int" })
+     sortNumber: number;
+
     // 文章类别
     @ApiProperty()
     @ManyToOne(type => ArticleType, articleType => articleType.articles, { cascade: true })
