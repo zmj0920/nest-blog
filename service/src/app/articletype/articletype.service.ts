@@ -11,7 +11,7 @@ export class ArticleTypeService {
         return await this.articleTypeRepository.find();
     }
 
-    async findOne(id: number): Promise<Object | Object[]> {
+    async findOne(id: number): Promise<Object> {
         const articleType= await this.articleTypeRepository.find({ relations: ["articles"] ,where: { id: id }});
         return { success: 200, data: articleType };
     }

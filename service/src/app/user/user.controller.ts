@@ -30,15 +30,9 @@ export class UserController {
     }
 
 
-    @Get('findOne/:name')
-    async findOne(@Param() params): Promise<User> {
-        // tslint:disable-next-line:no-console
-        console.log(params.name);
-        // tslint:disable-next-line:prefer-const
-        let result = await this.userService.findOne(params.name);
-        // tslint:disable-next-line:no-console
-        console.log(result);
-        return result;
+    @Post('login')
+    async findOne(@Body() body): Promise<Object> {
+        return await this.userService.login(body.name,body.pwd);
     }
 
     @Get('find')

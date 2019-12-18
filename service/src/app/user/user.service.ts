@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { User } from '../entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -27,7 +27,7 @@ export class UserService {
     }
 
 
-    async create(data: User): Promise<User|User[]> {
+    async create(data: User): Promise<User | User[]> {
         return await this.userRepository.save(
             await this.userRepository.create(data)
         );
@@ -35,11 +35,18 @@ export class UserService {
 
 
     async find(): Promise<User[]> {
-       
         return this.userRepository.find();
     }
-    async findOne(name: string): Promise<User> {
-     
-        return this.userRepository.findOne({ name });
+    async login(name: string, pwd: string): Promise<Object> {
+        const user = this.userRepository.findOne({ name, pwd });
+        if (user) {
+            const data = { id: (await user).id, name: (await user).name };
+            const token = jwt.sign(data, this.secret, {
+                expiresIn: 60 * 60 * 1  // 1小时过期
+            });
+            return { success: 200, token, data: { id: (await user).id, name: (await user).name, gender: (await user).gender, avatar: (await user).avatar, phone: (await user).phone } }
+        } else {
+            throw new HttpException("User doesn't exists", HttpStatus.BAD_REQUEST);
+        }
     }
 }
