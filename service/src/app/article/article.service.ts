@@ -24,12 +24,28 @@ export class ArticleService {
     }
 
 
+    async findLimit(pageNum: number, pageSize: number): Promise<Object | Object[]> {
+        const article = await getConnection()
+            .createQueryBuilder(Article, 'article')
+            .leftJoinAndSelect(ArticleType, 'article_type', 'article.articleTypeId=article_type.id')
+            .leftJoinAndSelect(User, 'user', 'article.userId=user.id')
+            .select(["article.id", "article.title", "article.introduce", "article.addTime", "article.viewCount",
+                "article_type.typeName", "user.name"]).offset((pageNum-1)*pageSize).limit(pageSize).orderBy({
+                    "article.sortNumber": "DESC",
+                    "article.id": "DESC"
+                })
+            .getRawMany()
+        return { success: 200, total: 100, pageNum: 10, pageSize: 20, data: article };
+    }
+
+
+
     async findOne(id: number): Promise<Object | Object[]> {
         const article = await getConnection()
             .createQueryBuilder(Article, 'article')
             .leftJoinAndSelect(ArticleType, 'article_type', 'article.articleTypeId=article_type.id')
             .leftJoinAndSelect(User, 'user', 'article.userId=user.id').where("article.id = :id", { id: id })
-            .select(["article.id", "article.title", "article.introduce","article.articleContent", "article.addTime", "article.viewCount",
+            .select(["article.id", "article.title", "article.introduce", "article.articleContent", "article.addTime", "article.viewCount",
                 "article_type.typeName", "user.name"])
             .getRawMany();
 
@@ -42,7 +58,7 @@ export class ArticleService {
             .createQueryBuilder(Article, 'article')
             .leftJoinAndSelect(ArticleType, 'article_type', 'article.articleTypeId=article_type.id')
             .leftJoinAndSelect(User, 'user', 'article.userId=user.id').where("article_type.id = :id", { id: id })
-            .select(["article.id", "article.title", "article.introduce","article.articleContent", "article.addTime", "article.viewCount",
+            .select(["article.id", "article.title", "article.introduce", "article.articleContent", "article.addTime", "article.viewCount",
                 "article_type.typeName", "user.name"])
             .getRawMany();
 

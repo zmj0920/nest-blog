@@ -16,6 +16,10 @@ export class ArticleController {
   async find(): Promise<Object | Object[]> {
     return await this.articleService.find()
   }
+  @Get("findLimit/:pageNum/:pageSize")
+  async findLimit(@Param() params): Promise<Object | Object[]> {
+    return await this.articleService.findLimit(params.pageNum,params.pageSize)
+  }
 
   @Get('findOne/:id')
   async findOne(@Param() params): Promise<Object> {
