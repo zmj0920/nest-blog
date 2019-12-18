@@ -19,7 +19,7 @@ export const columns1 = [
                     message: '文章标题'
                 }
             ],
-            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl:{span:"6"} },
+            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl:{span:"8"} },
         }
     },
     {
@@ -38,26 +38,26 @@ export const columns1 = [
                     message: '文章类型'
                 }
             ],
-            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl: { span: "6" } },
+            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl: { span: "8" } },
         }
     },
-    {
-        title: '发布日期',
-        name: 'addTime',
-        formItem: {
-            type: 'datetime',
-            showTime: true,
-            initialValue: moment(),
-            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl: { span: "6" } },
-        }
-    },
+    // {
+    //     title: '发布日期',
+    //     name: 'addTime',
+    //     formItem: {
+    //         type: 'datetime',
+    //         showTime: true,
+    //         initialValue: moment(),
+    //         col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl: { span: "6" } },
+    //     }
+    // },
 
     {
         title: '排序',
         name: 'ordder',
         formItem: {
             type: 'number',
-            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl: { span: "6" } },
+            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl: { span: "8" } },
         }
     },
     {
@@ -66,7 +66,7 @@ export const columns1 = [
             type: 'custom',
             col: { xs: { span: "24" }, sm: { span: "24" }, md: { span: "24" }, lg: { span: "24" }, xl: { span: "24" }, xxl: { span: "24" } },
             formItemLayout: {
-                labelCol: { span: 2 },
+                labelCol: { span: 2},
                 wrapperCol: { span: 12 }
             },
             render: (record, form) => {
