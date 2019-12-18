@@ -37,10 +37,12 @@ export default class extends BaseComponent {
       this.resize()
     })
   }
+
   onSubmit = (values) => {
     console.log(values);
     message.success(this.state.value)
   }
+
   handleChange(value) {
     this.setState({
       value
@@ -51,8 +53,11 @@ export default class extends BaseComponent {
     this.$vm.current.$img2Url($file.name, 'file_url')
     console.log($file)
   }
+
   render() {
+    
     const { value } = this.state
+
     return (
       <Layout className="full-layout page">
         <Content>
