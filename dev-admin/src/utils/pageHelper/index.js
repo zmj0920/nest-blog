@@ -1,9 +1,6 @@
 import PageInfo from './PageInfo';
 import config from '@/config';
-
-/**
- * 通用分页助手
- */
+//通用分页助手 
 export default class　PageHelper {
   static create = () => {
     const pageInfo = new PageInfo();

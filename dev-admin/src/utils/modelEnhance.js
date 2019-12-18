@@ -34,9 +34,9 @@ const CHANGE_STATE_SUCCESS = '@change_success';
 export async function asyncRequest(payload) {
   if (!payload || !payload.url)
     throw new Error('payload require contains url opt');
-  /**
-   * other中可以配置 method headers data 等参数
-   */
+  
+   // other中可以配置 method headers data 等参数
+   
   const { url, pageInfo, ...other } = payload;
 
   // 如果是分页查询 (格式化发送参数)

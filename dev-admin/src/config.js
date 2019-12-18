@@ -79,7 +79,6 @@ export default {
         pageSize,
         total,
         data,
-        //totalPage
       } = resp;
       return {
         pageNum: pageNum,

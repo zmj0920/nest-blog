@@ -1,8 +1,8 @@
 import $$ from 'cmn-utils';
 import PageHelper from './index';
-/**
- * 分页对象
- */
+
+// 分页对象
+ 
 export default class PageInfo {
   // 页码，从1开始
   pageNum = 1;

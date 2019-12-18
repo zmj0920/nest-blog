@@ -5,7 +5,7 @@ import { Layout, Button, message, Row, Col } from 'antd';
 import BaseComponent from 'components/BaseComponent';
 import Panel from 'components/Panel';
 import Form from 'components/Form';
-import { columns1 } from './columns';
+import createColumns from './columns';
 const { Content } = Layout;
 @connect()
 export default class extends BaseComponent {
@@ -57,14 +57,19 @@ export default class extends BaseComponent {
   render() {
     
     const { value } = this.state
-
+    const data = [
+      { code: '1', codeName: '文章分享' },
+      { code: '2', codeName: '222' },
+      { code: '3', codeName: '333' }
+    ]
+    const columns = createColumns(data);
     return (
       <Layout className="full-layout page">
         <Content>
           <Row gutter={16}>
             <Col span={24}>
               <Panel title="添加文章">
-                <Form columns={columns1} onSubmit={this.onSubmit} />
+                <Form columns={columns} onSubmit={this.onSubmit} />
               </Panel>
             </Col>
             <Col span={24}>

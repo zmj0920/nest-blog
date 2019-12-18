@@ -1,8 +1,8 @@
 import React from 'react';
-import moment from 'moment';
+// import moment from 'moment';
 import { Input } from 'antd';
 const { TextArea } = Input;
-export const columns1 = [
+export default (self) => [
     {
         name: 'id',
         formItem: {
@@ -25,11 +25,7 @@ export const columns1 = [
     {
         title: '文章类型',
         name: 'articleType',
-        dict: [
-            { code: '1', codeName: '111' },
-            { code: '2', codeName: '222' },
-            { code: '3', codeName: '333' }
-        ],
+        dict: self,
         formItem: {
             type: 'select',
             rules: [
