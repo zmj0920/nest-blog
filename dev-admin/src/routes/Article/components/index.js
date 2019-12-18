@@ -73,16 +73,13 @@ export default class extends BaseComponent {
     return (
       <Layout className="full-layout page">
         <Content>
-          <Row gutter={20}>
+          <Row gutter={16}>
             <Col span={24}>
               <Panel title="添加文章">
                 <Form columns={columns1} onSubmit={this.onSubmit} />
               </Panel>
             </Col>
-          </Row>
-
-          <Row >
-            {/* <Panel title=""> */}
+            <Col span={24}>
               {this.state.mobile && (
                 <Editor
                   ref={this.$vm}
@@ -127,7 +124,7 @@ export default class extends BaseComponent {
                   onSave={value => this.handleSave(value)}
                 />
               )}
-            {/* </Panel> */}
+            </Col>
           </Row>
         </Content>
       </Layout>

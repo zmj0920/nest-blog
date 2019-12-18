@@ -19,7 +19,7 @@ export const columns1 = [
                     message: '文章标题'
                 }
             ],
-            col: { span: 6 },
+            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl:{span:"6"} },
         }
     },
     {
@@ -38,7 +38,7 @@ export const columns1 = [
                     message: '文章类型'
                 }
             ],
-            col: { span: 6 },
+            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl: { span: "6" } },
         }
     },
     {
@@ -48,7 +48,7 @@ export const columns1 = [
             type: 'datetime',
             showTime: true,
             initialValue: moment(),
-            col: { span: 5 },
+            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl: { span: "6" } },
         }
     },
 
@@ -57,14 +57,14 @@ export const columns1 = [
         name: 'ordder',
         formItem: {
             type: 'number',
-            col: { span: 4 },
+            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "6" }, xxl: { span: "6" } },
         }
     },
     {
         title: '文章简介',
         formItem: {
             type: 'custom',
-            col: { span: 24 },
+            col: { xs: { span: "24" }, sm: { span: "24" }, md: { span: "24" }, lg: { span: "24" }, xl: { span: "24" }, xxl: { span: "24" } },
             formItemLayout: {
                 labelCol: { span: 2 },
                 wrapperCol: { span: 12 }
