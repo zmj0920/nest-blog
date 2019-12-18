@@ -16,7 +16,6 @@ export default class extends BaseComponent {
       value: '',
       mobile: null,
     }
-
     this.$vm = React.createRef()
   }
 
@@ -38,21 +37,9 @@ export default class extends BaseComponent {
       this.resize()
     })
   }
-
-  onChange = (value) => {
-    this.setState({
-      value
-    });
-  };
-
   onSubmit = (values) => {
-
     console.log(values);
     message.success(this.state.value)
-  }
-
-  clearValue = () => {
-    this.setState({ value: '' })
   }
   handleChange(value) {
     this.setState({
@@ -63,10 +50,6 @@ export default class extends BaseComponent {
   addImg($file) {
     this.$vm.current.$img2Url($file.name, 'file_url')
     console.log($file)
-  }
-
-  handleSave(value) {
-    console.log('触发保存事件', value)
   }
   render() {
     const { value } = this.state
@@ -98,7 +81,7 @@ export default class extends BaseComponent {
                   value={value}
                   subfield={false}
                   onChange={value => this.handleChange(value)}
-                  onSave={value => this.handleSave(value)}
+                
                 />
               )}
               {!this.state.mobile && (
@@ -125,7 +108,6 @@ export default class extends BaseComponent {
                   value={value}
                   addImg={($file) => this.addImg($file)}
                   onChange={value => this.handleChange(value)}
-                  onSave={value => this.handleSave(value)}
                 />
               )}
             </Col>
