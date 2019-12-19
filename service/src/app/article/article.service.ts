@@ -35,8 +35,8 @@ export class ArticleService {
                     "article.id": "DESC"
                 })
             .getRawMany()
-     //   const  sum  =  await this.articleRepository.find();
-        return { success: 200, total: article.length, pageNum: pageNum, pageSize: pageSize, data: article };
+        const  sum  =  await this.articleRepository.find();
+        return { success: 200, total: sum.length, pageNum: pageNum, pageSize: pageSize, data: article };
     }
 
 
@@ -65,7 +65,7 @@ export class ArticleService {
                     "article.id": "DESC"
                 })
             .getRawMany();
-
-            return { success: 200, total: article.length, pageNum: pageNum, pageSize: pageSize, data: article };
+        const sum = await this.articleRepository.find();
+        return { success: 200, total: sum.length, pageNum: pageNum, pageSize: pageSize, data: article };
     }
 }
