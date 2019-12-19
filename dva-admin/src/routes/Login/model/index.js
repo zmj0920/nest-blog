@@ -23,20 +23,8 @@ export default {
 
   effects: {
     *login({ payload }, { call, put }) {
-      //  const { status, message, data } = yield call(login, payload);
-
-      const status = 200
- 
-      const data = {
-        age: 49,
-        birthday: "1990-12-08",
-        city: "陕西省 榆林市",
-        name: "熊敏",
-        phone: "13188379568",
-        token: "1A64e86e-A2A6-f54D-edBD-7e62dFfE79cf",
-        userName: "admin",
-      }
-      if (status) {
+      const { success, data } = yield call(login, payload);
+      if (success===200) {
         $$.setStore('user', data);
         yield put(routerRedux.replace('/'));
       } else {

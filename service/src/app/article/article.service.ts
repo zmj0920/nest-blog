@@ -68,4 +68,11 @@ export class ArticleService {
         const sum = await this.articleRepository.find();
         return { success: 200, total: sum.length, pageNum: pageNum, pageSize: pageSize, data: article };
     }
+
+
+    async save(data:Article):Promise<Article>{
+        return await this.articleRepository.save(
+            await this.articleRepository.create(data)
+        );
+    }
 }

@@ -40,7 +40,7 @@ class Login extends Component {
                 <span>Admin</span>
               </div>
               <FormItem>
-                {getFieldDecorator('userName', {
+                {getFieldDecorator('name', {
                   initialValue: 'admin',
                   rules: [{ required: true, message: '请输入您的用户名，示例admin' }]
                 })(
@@ -52,8 +52,8 @@ class Login extends Component {
                 )}
               </FormItem>
               <FormItem>
-                {getFieldDecorator('password', {
-                  initialValue: 'admin',
+                {getFieldDecorator('pwd', {
+                  initialValue: '',
                   rules: [{ required: true, message: '请输入您的密码，示例admin' }]
                 })(
                   <Input
@@ -65,13 +65,13 @@ class Login extends Component {
                 )}
               </FormItem>
               <FormItem>
-                {getFieldDecorator('remember', {
+                {/* {getFieldDecorator('remember', {
                   valuePropName: 'checked',
                   initialValue: true
                 })(<Checkbox>记住我</Checkbox>)}
                 <Link className="login-form-forgot" to="#">
                   忘记密码
-                </Link>
+                </Link> */}
                 <Button
                   size="large"
                   type="primary"

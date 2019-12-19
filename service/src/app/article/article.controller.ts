@@ -30,4 +30,19 @@ export class ArticleController {
   async findTypeOne(@Param() params): Promise<Object> {
     return  await this.articleService.findTypeOne(params.id,params.pageNum,params.pageSize);
   }
+
+
+  @Post('create')
+  async create(@Body() body): Promise<Article> {
+      const article = new Article();
+      article.title=body.title
+      article.articleType=body.articleType
+      article.introduce=body.introduce
+      article.articleContent=body.articleContent
+      article.sortNumber=body.sortNumber
+      article.viewCount=0;
+      article.addTime=new Date()
+      article.user=body.userId
+      return await this.articleService.save(article);
+  }
 }
