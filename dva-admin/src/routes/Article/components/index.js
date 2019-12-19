@@ -7,7 +7,11 @@ import Panel from 'components/Panel';
 import Form from 'components/Form';
 import createColumns from './columns';
 const { Content } = Layout;
-@connect()
+
+@connect(({ article, loading }) => ({
+  article,
+  loading: loading.models.article
+}))
 export default class extends BaseComponent {
 
   constructor() {
@@ -57,6 +61,11 @@ export default class extends BaseComponent {
   render() {
     
     const { value } = this.state
+      
+     console.log(this.props)
+    
+        
+
     const data = [
       { code: '1', codeName: '文章分享' },
       { code: '2', codeName: '222' },

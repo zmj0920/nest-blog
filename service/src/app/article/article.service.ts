@@ -70,7 +70,7 @@ export class ArticleService {
     }
 
 
-    async save(data:Article):Promise<Article>{
+    async save(data:Article):Promise<Article|Article[]>{
         return await this.articleRepository.save(
             await this.articleRepository.create(data)
         );

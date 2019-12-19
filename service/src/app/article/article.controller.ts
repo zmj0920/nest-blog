@@ -2,7 +2,7 @@ import { Get, Controller, Post, Response, Param, HttpStatus, Request, Body } fro
 import { ArticleService } from './article.service';
 import { Article } from '../entities/article.entity';
 import { ApiTags, ApiHeader, ApiCreatedResponse } from '@nestjs/swagger';
-
+import * as jwt from "jsonwebtoken";
 @ApiHeader({
   name: 'Authorization',
   description: 'Auth token',
@@ -11,38 +11,46 @@ import { ApiTags, ApiHeader, ApiCreatedResponse } from '@nestjs/swagger';
 @Controller('article')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) { }
- 
+
   @Get("find")
   async find(): Promise<Object | Object[]> {
     return await this.articleService.find()
   }
   @Get("findLimit/:pageNum/:pageSize")
   async findLimit(@Param() params): Promise<Object | Object[]> {
-    return await this.articleService.findLimit(params.pageNum,params.pageSize)
+    return await this.articleService.findLimit(params.pageNum, params.pageSize)
   }
 
   @Get('findOne/:id')
   async findOne(@Param() params): Promise<Object> {
-    return  await this.articleService.findOne(params.id);
+    return await this.articleService.findOne(params.id);
   }
 
   @Get('findTypeOne/:id/:pageNum/:pageSize')
   async findTypeOne(@Param() params): Promise<Object> {
-    return  await this.articleService.findTypeOne(params.id,params.pageNum,params.pageSize);
+    return await this.articleService.findTypeOne(params.id, params.pageNum, params.pageSize);
   }
 
 
   @Post('create')
-  async create(@Body() body): Promise<Article> {
-      const article = new Article();
-      article.title=body.title
-      article.articleType=body.articleType
-      article.introduce=body.introduce
-      article.articleContent=body.articleContent
-      article.sortNumber=body.sortNumber
-      article.viewCount=0;
-      article.addTime=new Date()
-      article.user=body.userId
-      return await this.articleService.save(article);
+  async create(@Body() body): Promise<Article|Article[]> {
+    console.log(body)
+    const article = new Article();
+    if (body) {
+      article.title = body.title
+      article.articleType = body.articleType
+      article.introduce = body.introduce
+      article.articleContent = body.articleContent
+      article.sortNumber = body.sortNumber
+      article.viewCount = 0;
+      article.addTime = new Date()
+      jwt.verify(body.token, 'aaa', (err: any, decoded) => {
+        if (!err) {
+          article.user = decoded.id
+        }
+      })
+    }
+
+    return await this.articleService.save(article);
   }
 }
