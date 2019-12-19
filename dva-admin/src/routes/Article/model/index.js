@@ -1,5 +1,5 @@
 import modelEnhance from '@/utils/modelEnhance';
-import PageHelper from '@/utils/pageHelper';
+import { articleType } from '../service';
 /**
  * 当第一次加载完页面时为true
  * 可以用这个值阻止切换页面时
@@ -9,8 +9,7 @@ let LOADED = false;
 export default modelEnhance({
   namespace: 'article',
   state: {
-    pageData: PageHelper.create(),
-    employees: []
+    article_type: []
   },
   subscriptions: {
     setup({ dispatch, history }) {
@@ -26,7 +25,7 @@ export default modelEnhance({
   },
   effects: {
     // 进入页面加载
-    *init({ payload }, {  put }) {
+    *init({ payload }, { put }) {
       yield put({
         type: 'articleTypeList'
       });
@@ -44,20 +43,23 @@ export default modelEnhance({
           data: values
         }
       });
-    
-     // success();
+      // success();
     },
-    // 获取员工列表
+    // 文章类型列表
     *articleTypeList({ payload }, { call, put }) {
+      const data = yield call(articleType, payload);
       yield put({
-        type: '@request',
-        afterResponse: resp => resp.data,
-        payload: {
-          valueField: 'articleType',
-          url: 'articleType/find'
-        }
+        type: 'articleTypeHandle',
+        payload: data,
       });
     }
   },
-  reducers: {}
+  reducers: {
+    articleTypeHandle(state, { payload }) {
+      return {
+        ...state,
+        article_type: payload,
+      };
+    },
+  }
 });

@@ -19,13 +19,15 @@ export default (self) => [
                     message: '文章标题'
                 }
             ],
-            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "8" }, xxl:{span:"8"} },
+            col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "8" }, xxl: { span: "8" } },
         }
     },
     {
         title: '文章类型',
         name: 'articleType',
-        dict: self,
+        dict:[...self.article_type.map(item => {
+            return { code: item.id, codeName: item.typeName }
+        })],
         formItem: {
             type: 'select',
             rules: [
@@ -62,7 +64,7 @@ export default (self) => [
             type: 'custom',
             col: { xs: { span: "24" }, sm: { span: "24" }, md: { span: "24" }, lg: { span: "24" }, xl: { span: "24" }, xxl: { span: "24" } },
             formItemLayout: {
-                labelCol: { span: 2},
+                labelCol: { span: 2 },
                 wrapperCol: { span: 12 }
             },
             render: (record, form) => {

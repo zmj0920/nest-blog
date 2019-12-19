@@ -59,19 +59,16 @@ export default class extends BaseComponent {
   }
 
   render() {
-    
-    const { value } = this.state
-      
-     console.log(this.props)
-    
-        
 
-    const data = [
-      { code: '1', codeName: '文章分享' },
-      { code: '2', codeName: '222' },
-      { code: '3', codeName: '333' }
-    ]
-    const columns = createColumns(data);
+    const { value } = this.state
+
+
+
+    const { article } = this.props
+
+    console.log(article)
+  //  const data = article
+    const columns = createColumns(article);
     return (
       <Layout className="full-layout page">
         <Content>
@@ -100,7 +97,7 @@ export default class extends BaseComponent {
                   value={value}
                   subfield={false}
                   onChange={value => this.handleChange(value)}
-                
+
                 />
               )}
               {!this.state.mobile && (
