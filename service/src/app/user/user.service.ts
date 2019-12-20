@@ -42,7 +42,7 @@ export class UserService {
         if (user) {
             const data = { id: (await user).id, name: (await user).name };
             const token = jwt.sign(data, this.secret, {
-                expiresIn: 60 * 60 * 1  // 1小时过期
+                expiresIn: 60 * 60 * 5  // 1小时过期
             });
             return { success: 200, data: { id: (await user).id, name: (await user).name, gender: (await user).gender, avatar: (await user).avatar, phone: (await user).phone,token:token } }
         } else {
