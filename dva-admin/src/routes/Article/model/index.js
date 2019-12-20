@@ -30,20 +30,19 @@ export default modelEnhance({
         type: 'articleTypeList'
       });
     },
-    // 保存 之后查询分页
+    // 添加文章
     *save({ payload }, { call, put, select, take }) {
-      const { values, success } = payload;
-      const { pageData } = yield select(state => state.crud);
+      const { article, success } = payload;
       // put是非阻塞的 put.resolve是阻塞型的
-      yield put.resolve({
+      yield put({
         type: '@request',
         payload: {
           notice: true,
           url: '/article/create',
-          data: values
+          data: article
         }
       });
-      // success();
+      success()
     },
     // 文章类型列表
     *articleTypeList({ payload }, { call, put }) {

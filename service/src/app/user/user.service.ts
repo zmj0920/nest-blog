@@ -44,7 +44,7 @@ export class UserService {
             const token = jwt.sign(data, this.secret, {
                 expiresIn: 60 * 60 * 1  // 1小时过期
             });
-            return { success: 200, token, data: { id: (await user).id, name: (await user).name, gender: (await user).gender, avatar: (await user).avatar, phone: (await user).phone } }
+            return { success: 200, data: { id: (await user).id, name: (await user).name, gender: (await user).gender, avatar: (await user).avatar, phone: (await user).phone,token:token } }
         } else {
             throw new HttpException("User doesn't exists", HttpStatus.BAD_REQUEST);
         }

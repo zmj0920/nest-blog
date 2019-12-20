@@ -4,12 +4,6 @@ import { Input } from 'antd';
 const { TextArea } = Input;
 export default (self) => [
     {
-        name: 'id',
-        formItem: {
-            type: 'hidden'
-        }
-    },
-    {
         title: '文章标题',
         name: 'title',
         formItem: {
@@ -52,7 +46,7 @@ export default (self) => [
 
     {
         title: '排序',
-        name: 'ordder',
+        name: 'sortNumber',
         formItem: {
             type: 'number',
             col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "8" }, xxl: { span: "8" } },
