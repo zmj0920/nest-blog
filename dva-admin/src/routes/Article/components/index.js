@@ -23,6 +23,8 @@ export default class extends BaseComponent {
             user: $$.getStore('user')
         }
         this.$vm = React.createRef()
+
+        this.$from=React.createRef()
     }
 
     resize() {
@@ -44,6 +46,7 @@ export default class extends BaseComponent {
         })
     }
 
+
     onSubmit = (values) => {
         const { dispatch } = this.props;
         const article = Object.assign(values, { token: this.state.user.token }, { articleContent: this.state.value })
@@ -52,7 +55,8 @@ export default class extends BaseComponent {
             payload: {
                 article,
                 success: () => {
-                 
+                    this.$from.current.resetFields()
+                    this.state.value=""
                 }
             }
         });
@@ -81,7 +85,7 @@ export default class extends BaseComponent {
                     <Row gutter={16}>
                         <Col span={24}>
                             <Panel title="添加文章">
-                                <Form columns={columns} onSubmit={this.onSubmit} />
+                                <Form columns={columns} ref={this.$from} onSubmit={this.onSubmit} />
                             </Panel>
                         </Col>
                         <Col span={24}>
