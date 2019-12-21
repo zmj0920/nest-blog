@@ -1,4 +1,4 @@
-let ipUrl = 'http://127.0.0.1:5000'
+let ipUrl = 'http://47.95.225.57:5000'
 
 let servicePath = {
     getArticleList: ipUrl + '/article/find',  //  首页文章列表接口
