@@ -13,14 +13,13 @@ import Link from 'next/link'
 import dayjs from 'dayjs'
 
 const myList = ({ router }) => {
-  console.log(router.query.id)
   const [mylist, setMylist] = useState([]);
   const [pageNum, setpageNum] = useState(1);
   const [pageSize, setpageSize] = useState(10);
   const [total, setTotal] = useState(0);
   const [titleType, setTitle] = useState('');
-  const getArticleLimit = (pageNum, pageSize) => {
-    axios(`${servicePath.getListById}${router.query.id}/${pageNum}/${pageSize}`).then(
+  const getArticleLimit = (id,pageNum, pageSize) => {
+    axios(`${servicePath.getListById}${id}/${pageNum}/${pageSize}`).then(
       res => {
         if (res.data.success === 200) {
           console.log(res)
@@ -33,8 +32,8 @@ const myList = ({ router }) => {
   }
 
   useEffect(() => {
-    getArticleLimit(pageNum, pageSize)
-  }, [])
+    getArticleLimit(router.query.id,pageNum, pageSize)
+  }, [router.query.id,,pageNum, pageSize])
 
   const onShowSizeChange = (current, pageSize) => {
     setpageSize(pageSize)

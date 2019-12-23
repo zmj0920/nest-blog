@@ -43,7 +43,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>博客首页</title>
       </Head>
       <Header />
       <Row className="comm-main" type="flex" justify="center">
