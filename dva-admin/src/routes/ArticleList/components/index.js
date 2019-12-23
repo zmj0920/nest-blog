@@ -4,12 +4,18 @@ import { Layout } from 'antd';
 import BaseComponent from 'components/BaseComponent';
 const { Content } = Layout;
 
-@connect()
+
+@connect(({ articleList, loading }) => ({
+  articleList,
+  loading: loading.models.articleList
+}))
 export default class extends BaseComponent {
   render() {
+    const articleTypeList=this.props
+    console.log(articleTypeList)
     return (
       <Layout className="full-layout page blank-page">
-        <Content>详情页</Content>
+        <Content>空白页</Content>
       </Layout>
     );
   }

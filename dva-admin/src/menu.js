@@ -12,7 +12,12 @@ export default [
             {
                 name: '添加文章',
                 path: '/article',
-            },]
+            },
+            {
+                name: '文章列表',
+                path: '/articleList',
+            }
+        ]
     },
     // {
     //     name: '组件',
