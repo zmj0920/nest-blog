@@ -29,39 +29,55 @@ export default modelEnhance({
   effects: {
     // 进入页面加载
     *init({ payload }, { call, put, select }) {
-         yield put({
-           type:"article_typeList"
-         })
+      const { pageData } = yield select(state => state.articleList);
+      yield put({
+        type: 'getPageList',
+        payload: {
+          pageData: pageData
+        }
+      });
+      yield put({
+        type: "article_typeList"
+      })
     },
     // 获取分页数据
     *getPageList({ payload }, { call, put }) {
-      
+      const { pageData } = payload;
+      console.log(pageData)
+      yield put({
+        type: '@request',
+        payload: {
+          method: 'GET',
+          valueField: 'pageData',
+          url: `article/findLimit/${pageData.pageNum}/${pageData.pageSize}`
+        }
+      })
     },
     // 保存 之后查询分页
     *save({ payload }, { call, put, select, take }) {
-     
+
     },
     // 修改
-    *update({ payload }, { call, put ,select}) {
-     
+    *update({ payload }, { call, put, select }) {
+
     },
     // 删除 之后查询分页
     *remove({ payload }, { call, put, select }) {
-     
+
     },
-    *article_typeList({payload},{call,put}){
-      const data = yield call(articleType,payload)
-       yield put({
-         type:'articleTypeHandle',
-         payload: data
-       })
+    *article_typeList({ payload }, { call, put }) {
+      const data = yield call(articleType, payload)
+      yield put({
+        type: 'articleTypeHandle',
+        payload: data
+      })
     }
   },
   reducers: {
-    articleTypeHandle(state,{payload}){
-      return{
-       ...state,
-       article_type:payload
+    articleTypeHandle(state, { payload }) {
+      return {
+        ...state,
+        article_type: payload
       }
     }
   }
