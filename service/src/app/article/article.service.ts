@@ -46,7 +46,7 @@ export class ArticleService {
             .leftJoinAndSelect(ArticleType, 'article_type', 'article.articleTypeId=article_type.id')
             .leftJoinAndSelect(User, 'user', 'article.userId=user.id')
             .select(["article.id", "article.title", "article.introduce","article.articleContent", "article.addTime", "article.viewCount",
-                "article_type.typeName", "user.name"]).offset((pageNum - 1) * pageSize).limit(pageSize)
+                "article_type.id", "user.name"]).offset((pageNum - 1) * pageSize).limit(pageSize)
             .getRawMany()
         const  sum  =  await this.articleRepository.find();
         return { success: 200, total: Number(sum.length), pageNum: Number(pageNum), pageSize: Number(pageSize), data: article };

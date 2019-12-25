@@ -1,4 +1,6 @@
 import React from 'react';
+import { Input } from 'antd';
+const { TextArea } = Input;
 import DataTable from 'components/DataTable';
 import Icon from 'components/Icon';
 import Button from 'components/Button';
@@ -21,12 +23,14 @@ export default (self, article_type) => [
     tableItem: {
       width: 400
     },
-    formItem: {},
+    formItem: {
+      type: 'textarea',
+    },
     searchItem: {}
   },
   {
     title: '文章类型',
-    name: 'article_type_typeName',
+    name: 'article_type_id',
     dict: [...article_type.map(item => {
       return { code: item.id, codeName: item.typeName }
     })],
@@ -44,7 +48,6 @@ export default (self, article_type) => [
     tableItem: {
       width: 200
     },
-    formItem: {},
     searchItem: {}
   },
   {
@@ -53,7 +56,6 @@ export default (self, article_type) => [
     tableItem: {
       width: 150
     },
-    formItem: {},
     searchItem: {}
   },
   {
@@ -61,9 +63,16 @@ export default (self, article_type) => [
     name: 'article_addTime',
     tableItem: {
       width: 150,
-      render: text => text? moment(text).format('YYYY-MM-DD HH:mm'): null
+      render: text => text ? moment(text).format('YYYY-MM-DD HH:mm') : null
     },
-    formItem: {},
+    searchItem: {}
+  },
+  {
+    title: '文章内容',
+    name: 'article_articleContent',
+    formItem: {
+      type: 'textarea',
+    },
     searchItem: {}
   },
   {
