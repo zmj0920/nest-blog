@@ -13,7 +13,6 @@ export default class extends BaseComponent {
     this.state = {
       replyContent: ''
     }
-
   }
   handleChange = replyContent => {
     this.setState({

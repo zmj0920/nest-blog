@@ -48,9 +48,9 @@ export default class extends BaseComponent {
   render() {
     const { articleList, loading, dispatch } = this.props;
     const { pageData, article_type } = articleList;
-    const columns = createColumns(this,article_type);
+    const columns = createColumns(this, article_type);
     const { rows, record, visible } = this.state;
-     console.log(pageData)
+    console.log(pageData)
     const searchBarProps = {
       columns,
       onSearch: values => {
@@ -101,6 +101,7 @@ export default class extends BaseComponent {
       // 可以使用主键或是否有record来区分状态
 
       onSubmit: values => {
+        console.log(values)
         if (record) {
           dispatch({
             type: 'articleList/update',
