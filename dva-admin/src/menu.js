@@ -16,6 +16,10 @@ export default [
             {
                 name: '文章列表',
                 path: '/articleList',
+            },
+            {
+                name: 'blank',
+                path: '/blank',
             }
         ]
     },

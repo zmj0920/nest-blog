@@ -28,7 +28,7 @@ import CSSAnimate from './Widgets/CSSAnimate';
 import Icon from './Widgets/Icon';
 import Form from './Widgets/Form';
 import Article from './Article';
-
+import Blank from './Blank';
 
 //import DataTable from './Widgets/DataTable';
 /**
@@ -61,6 +61,7 @@ const routesConfig = app => [
       //仪表盘
       Dashboard(app),
       Form(app),
+      Blank(app),
       //文章列表
       ArticleList(app),
       Button(),
