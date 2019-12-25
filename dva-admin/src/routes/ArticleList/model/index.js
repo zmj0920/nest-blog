@@ -43,13 +43,13 @@ export default modelEnhance({
     // 获取分页数据
     *getPageList({ payload }, { call, put }) {
       const { pageData } = payload;
-      console.log(pageData)
       yield put({
         type: '@request',
         payload: {
           method: 'GET',
           valueField: 'pageData',
-          url: `article/findLimit/${pageData.pageNum}/${pageData.pageSize}`
+          url: `article/findLimitAll/${pageData.pageNum}/${pageData.pageSize}`,
+          pageInfo: pageData
         }
       })
     },
