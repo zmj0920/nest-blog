@@ -7,7 +7,7 @@ import * as serveStatic from 'serve-static';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cors({
-    origin: [ 'http://localhost:3002', 'http://localhost:3000', 'http://docs.521em.cn','http://blog.521em.cn',
+    origin: [ 'http://localhost:3002', 'http://localhost:3000', 'http://docs.521em.cn','https://blog.521em.cn',
     'http://47.95.225.57:3002'],
     credentials: true,
   }));
