@@ -7,7 +7,7 @@ import Page500 from './Pages/500';
 import Login from './Login';
 import Register from './Register';
 import Dashboard from './Dashboard';
-import Blank from './Blank';
+import ArticleList from './ArticleList';
 import CRUD from './Business/CRUD';
 import CRUDDetail from './Business/CRUD/routers/Detail';
 import ScreenLock from './Widgets/ScreenLock';
@@ -28,7 +28,7 @@ import CSSAnimate from './Widgets/CSSAnimate';
 import Icon from './Widgets/Icon';
 import Form from './Widgets/Form';
 import Article from './Article';
-
+import Blank from './Blank';
 
 //import DataTable from './Widgets/DataTable';
 /**
@@ -61,8 +61,9 @@ const routesConfig = app => [
       //仪表盘
       Dashboard(app),
       Form(app),
-      //空白页
       Blank(app),
+      //文章列表
+      ArticleList(app),
       Button(),
       Print(),
       Article(app),

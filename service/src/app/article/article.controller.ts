@@ -21,6 +21,13 @@ export class ArticleController {
     return await this.articleService.findLimit(params.pageNum, params.pageSize)
   }
 
+  @Get("findLimitAll/:pageNum/:pageSize")
+  async findLimitAll(@Param() params): Promise<Object | Object[]> {
+    return await this.articleService.findLimitAll(params.pageNum, params.pageSize)
+  }
+
+
+
   @Get('findOne/:id')
   async findOne(@Param() params): Promise<Object> {
     return await this.articleService.findOne(params.id);
