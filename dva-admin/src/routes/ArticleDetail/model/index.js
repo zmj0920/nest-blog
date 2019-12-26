@@ -10,21 +10,20 @@ export default modelEnhance({
   namespace: 'articleDetail',
 
   state: {
-
+    articlelist: []
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
-
-      history.listen((location) => {
-        console.log(location)
-      })
       history.listen(({ pathname, search }) => {
         if (pathname === '/articleDetail' && !LOADED) {
-          LOADED = true;
+         // LOADED = true;
+          var reg = new RegExp("(^|&)id=([^&]*)(&|$)");
+          var r = search.substr(1).match(reg);
+          console.log(unescape(r[2]))
           dispatch({
             type: 'init',
-            payload: search
+            payload: unescape(r[2])
           });
         }
       });
@@ -34,9 +33,22 @@ export default modelEnhance({
   effects: {
     // 进入页面加载
     *init({ payload }, { call, put, select }) {
-      console.log(payload)
+     
+      yield put({
+          type: 'article',
+          payload:payload
+        })
+    },
+    *article({ payload }, { call, put }) {
+      yield put({
+        type: '@request',
+        payload: {
+          method: 'GET',
+          valueField: 'articlelist',
+          url: `/article/articleDetail/${payload}`
+        }
+      })
     }
-
   },
   reducers: {}
 });

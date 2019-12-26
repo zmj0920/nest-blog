@@ -35,7 +35,7 @@ export class ArticleService {
                     "article.id": "DESC"
                 })
             .getRawMany()
-        const  sum  =  await this.articleRepository.find();
+        const sum = await this.articleRepository.find();
         return { success: 200, total: sum.length, pageNum: pageNum, pageSize: pageSize, data: article };
     }
 
@@ -45,16 +45,15 @@ export class ArticleService {
             .createQueryBuilder(Article, 'article')
             .leftJoinAndSelect(ArticleType, 'article_type', 'article.articleTypeId=article_type.id')
             .leftJoinAndSelect(User, 'user', 'article.userId=user.id')
-            .select(["article.id", "article.title", "article.introduce","article.articleContent", "article.addTime", "article.viewCount",
+            .select(["article.id", "article.title", "article.introduce", "article.articleContent", "article.addTime", "article.viewCount",
                 "article_type.id", "user.name"]).offset((pageNum - 1) * pageSize).limit(pageSize)
             .getRawMany()
-        const  sum  =  await this.articleRepository.find();
+        const sum = await this.articleRepository.find();
         return { success: 200, total: Number(sum.length), pageNum: Number(pageNum), pageSize: Number(pageSize), data: article };
     }
 
 
     async findOne(id: number): Promise<Object | Object[]> {
-        
         const article = await getConnection()
             .createQueryBuilder(Article, 'article')
             .leftJoinAndSelect(ArticleType, 'article_type', 'article.articleTypeId=article_type.id')
@@ -62,12 +61,25 @@ export class ArticleService {
             .select(["article.id", "article.title", "article.introduce", "article.articleContent", "article.addTime", "article.viewCount",
                 "article_type.typeName", "user.name"])
             .getRawMany();
-
         return { success: 200, data: article };
     }
 
 
-    async findTypeOne(id: number,pageNum: number, pageSize: number): Promise<Object | Object[]> {
+    async articleDetail(id: number): Promise<Object | Object[]> {
+        return await getConnection()
+            .createQueryBuilder(Article, 'article')
+            .leftJoinAndSelect(ArticleType, 'article_type', 'article.articleTypeId=article_type.id')
+            .leftJoinAndSelect(User, 'user', 'article.userId=user.id').where("article.id = :id", { id: id })
+            .select(["article.id", "article.title", "article.introduce", "article.articleContent", "article.addTime", "article.viewCount",
+                "article_type.typeName", "user.name"])
+            .getRawMany();
+    }
+
+
+
+
+
+    async findTypeOne(id: number, pageNum: number, pageSize: number): Promise<Object | Object[]> {
         const article = await getConnection()
             .createQueryBuilder(Article, 'article')
             .leftJoinAndSelect(ArticleType, 'article_type', 'article.articleTypeId=article_type.id')
@@ -83,7 +95,7 @@ export class ArticleService {
     }
 
 
-    async save(data:Article):Promise<Article|Article[]>{
+    async save(data: Article): Promise<Article | Article[]> {
         return await this.articleRepository.save(
             await this.articleRepository.create(data)
         );
