@@ -8,6 +8,10 @@ import Login from './Login';
 import Register from './Register';
 import Dashboard from './Dashboard';
 import ArticleList from './ArticleList';
+import ArticleDetail from './ArticleDetail';
+import Article from './Article';
+import Blank from './Blank';
+
 import CRUD from './Business/CRUD';
 import CRUDDetail from './Business/CRUD/routers/Detail';
 import ScreenLock from './Widgets/ScreenLock';
@@ -27,8 +31,7 @@ import Button from './Widgets/Button';
 import CSSAnimate from './Widgets/CSSAnimate';
 import Icon from './Widgets/Icon';
 import Form from './Widgets/Form';
-import Article from './Article';
-import Blank from './Blank';
+
 
 //import DataTable from './Widgets/DataTable';
 /**
@@ -64,6 +67,8 @@ const routesConfig = app => [
       Blank(app),
       //文章列表
       ArticleList(app),
+      ArticleDetail(app),
+
       Button(),
       Print(),
       Article(app),

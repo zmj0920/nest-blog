@@ -113,19 +113,26 @@ export default (self, article_type) => [
   {
     title: '操作',
     tableItem: {
-      align:'center',
+      align: 'center',
       width: 150,
       fixed: 'right',
-      render: (text, record) => (
-        <DataTable.Oper>
-          <Button tooltip="修改" onClick={e => self.onUpdate(record)}>
-            <Icon type="edit" />
-          </Button>
-          <Button tooltip="删除" onClick={e => self.onDelete(record)}>
-            <Icon type="trash" />
-          </Button>
-        </DataTable.Oper>
-      )
+      render: (text, record) => {
+        return(
+          <DataTable.Oper>
+            <Button tooltip="修改" onClick={e => self.onUpdate(record)}>
+              <Icon type="edit" />
+            </Button>
+            <Button tooltip="删除" onClick={e => self.onDelete(record)}>
+              <Icon type="trash" />
+            </Button>
+            <Button tooltip="查看">
+              <Link to={"/articleDetail?id=" + record.article_id}>
+                <Icon type="link" antd />
+              </Link>
+            </Button>
+          </DataTable.Oper>
+        )
+      }
     }
   }
 ];
