@@ -1,7 +1,7 @@
 import React from 'react';
 import Editor from 'components/Markdown';
 import $$ from 'cmn-utils';
-import getValueFromRecord from "@/utils/getValueFromRecord";
+import getValueFromRecord from '@/utils/getValueFromRecord';
 
 /**
  * markdown编辑器插件
