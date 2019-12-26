@@ -21,6 +21,7 @@ export default class extends BaseComponent {
 
   state = {
     record: null,
+    toolbar: {},
     visible: false,
     rows: []
   };
@@ -43,14 +44,54 @@ export default class extends BaseComponent {
     });
   };
 
+  componentDidMount() {
+    this.resize()
+    window.addEventListener('resize', () => {
+      this.resize()
+    })
+  }
+
+  resize() {
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      this.setState({
+        toolbar: {
+          h1: true, // h1
+          h2: true, // h2
+          h3: true, // h3
+          h4: true, // h4
+          img: true, // 图片
+          link: true, // 链接
+          code: true, // 代码块
+          preview: true, // 预览
+          expand: true, // 全屏
+          undo: true, // 撤销
+          redo: true, // 重做
+          // save: true, // 保存
+          subfield: true, // 单双栏模式
+        }
+      })
+    } else {
+      this.setState({
+        toolbar: {
+          h1: true, // h1
+          h2: true, // h2
+          img: true, // 图片
+          preview: true, // 预览
+          undo: true, // 撤销
+          redo: true, // 重做
+        }
+      })
+    }
+  }
+
 
 
   render() {
+    const { rows, record, visible, toolbar } = this.state;
     const { articleList, loading, dispatch } = this.props;
     const { pageData, article_type } = articleList;
-    const columns = createColumns(this, article_type);
-    const { rows, record, visible } = this.state;
-    console.log(pageData)
+    const columns = createColumns(this, article_type, toolbar);
+
     const searchBarProps = {
       columns,
       onSearch: values => {
@@ -129,7 +170,6 @@ export default class extends BaseComponent {
             }
           });
         }
-
       }
     };
 

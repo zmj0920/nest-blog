@@ -6,6 +6,7 @@ const { Content } = Layout;
 
 @connect()
 export default class extends BaseComponent {
+
   render() {
     return (
       <Layout className="full-layout page blank-page">
