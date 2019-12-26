@@ -69,7 +69,7 @@ export default (self, article_type) => [
     name: 'article_introduce',
     tableItem: {
       align: 'center',
-      width: 400
+      width: 450
     },
     formItem: {
       formItemLayout: {
