@@ -9,7 +9,8 @@ export default (self, article_type) => [
     title: '标题',
     name: 'article_title',
     tableItem: {
-      width: 250,
+      width: 200,
+      align: 'center',
       fixed: 'left',
     },
     formItem: { col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "12" }, xxl: { span: "12" } } },
@@ -21,7 +22,10 @@ export default (self, article_type) => [
     dict: [...article_type.map(item => {
       return { code: item.id, codeName: item.typeName }
     })],
-    tableItem: { width: 200 },
+    tableItem: {
+      align: 'center',
+      width: 200
+    },
     formItem: {
       col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "12" }, xxl: { span: "12" } },
       type: 'select'
@@ -36,6 +40,7 @@ export default (self, article_type) => [
     title: '作者',
     name: 'user_name',
     tableItem: {
+      align: 'center',
       width: 200
     },
     searchItem: {}
@@ -44,6 +49,7 @@ export default (self, article_type) => [
     title: '点击次数',
     name: 'article_viewCount',
     tableItem: {
+      align: 'center',
       width: 150
     },
     searchItem: {}
@@ -52,6 +58,7 @@ export default (self, article_type) => [
     title: '发布日期',
     name: 'article_addTime',
     tableItem: {
+      align: 'center',
       width: 150,
       render: text => text ? moment(text).format('YYYY-MM-DD HH:mm') : null
     },
@@ -61,6 +68,7 @@ export default (self, article_type) => [
     title: '文章简介',
     name: 'article_introduce',
     tableItem: {
+      align: 'center',
       width: 400
     },
     formItem: {
@@ -105,7 +113,8 @@ export default (self, article_type) => [
   {
     title: '操作',
     tableItem: {
-      width: 250,
+      align:'center',
+      width: 150,
       fixed: 'right',
       render: (text, record) => (
         <DataTable.Oper>
@@ -114,11 +123,6 @@ export default (self, article_type) => [
           </Button>
           <Button tooltip="删除" onClick={e => self.onDelete(record)}>
             <Icon type="trash" />
-          </Button>
-          <Button tooltip="跳转到新路由">
-            <Link to={"/crud/detail?id=" + record.id}>
-              <Icon type="link" antd />
-            </Link>
           </Button>
         </DataTable.Oper>
       )

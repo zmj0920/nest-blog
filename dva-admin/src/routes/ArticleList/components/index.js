@@ -71,7 +71,7 @@ export default class extends BaseComponent {
       isScroll: { x: 666, y: 500 }, //固定表头和左右固定空白问题需要设一个宽 
       dataItems: pageData,
       selectType: 'checkbox',
-      showNum: true, //行号
+      showNum: false, //行号
       selectedRowKeys: rows.map(item => item.rowKey),
       onChange: ({ pageNum, pageSize }) => {
         dispatch({
