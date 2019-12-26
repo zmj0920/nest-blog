@@ -89,7 +89,7 @@ export default class extends BaseComponent {
       visible,
       columns,
       modalOpts: {
-        width: 700
+        width: '80%'
       },
       onCancel: () => {
         this.setState({

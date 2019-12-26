@@ -12,18 +12,7 @@ export default (self, article_type) => [
       width: 250,
       fixed: 'left',
     },
-    formItem: {},
-    searchItem: {}
-  },
-  {
-    title: '文章简介',
-    name: 'article_introduce',
-    tableItem: {
-      width: 400
-    },
-    formItem: {
-      type: 'textarea',
-    },
+    formItem: { col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "12" }, xxl: { span: "12" } } },
     searchItem: {}
   },
   {
@@ -34,12 +23,15 @@ export default (self, article_type) => [
     })],
     tableItem: { width: 200 },
     formItem: {
+      col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "12" }, xxl: { span: "12" } },
       type: 'select'
     },
     searchItem: {
       type: 'select'
     }
   },
+
+
   {
     title: '作者',
     name: 'user_name',
@@ -66,9 +58,30 @@ export default (self, article_type) => [
     searchItem: {}
   },
   {
+    title: '文章简介',
+    name: 'article_introduce',
+    tableItem: {
+      width: 400
+    },
+    formItem: {
+      formItemLayout: {
+        labelCol: { span: 2 },
+        wrapperCol: { span: 22 }
+      },
+      col: { xs: { span: "24" }, sm: { span: "24" }, md: { span: "24" }, lg: { span: "24" }, xl: { span: "24" }, xxl: { span: "24" } },
+      type: 'textarea',
+    },
+    searchItem: {}
+  },
+  {
     title: '内容',
     name: 'article_articleContent',
     formItem: {
+      formItemLayout: {
+        labelCol: { span: 2 },
+        wrapperCol: { span: 22 }
+      },
+      col: { xs: { span: "24" }, sm: { span: "24" }, md: { span: "24" }, lg: { span: "24" }, xl: { span: "24" }, xxl: { span: "24" } },
       type: 'markdown',
       markdownProps: {
         height: 500,
