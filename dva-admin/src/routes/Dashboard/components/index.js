@@ -22,6 +22,20 @@ for (let i = 0; i < 7; i += 1) {
   dashboard
 }))
 export default class Dashboard extends BaseComponent {
+
+  constructor() {
+    super()
+    this.state = {
+      canClone: true,
+
+    }
+
+  }
+
+  onClose = () => {
+    this.setState({ canClone: false })
+  }
+
   render() {
     // const { dashboard } = this.props;
     //  console.log(JSON.stringify(dashboard))
@@ -69,7 +83,9 @@ export default class Dashboard extends BaseComponent {
           </Row>
           <Row>
             <Col>
-              <Panel title="数据面板组件" height={300}>
+            { this.state.canClone && (<Panel title="数据面板组件"
+                onClose={this.onClose}
+                height={300}>
                 <div className="flex">
                   <div className="flex-auto-hidden flex flex-column">
                     <h4 className="flex-none">销售额分布</h4>
@@ -90,7 +106,9 @@ export default class Dashboard extends BaseComponent {
                     </ul>
                   </div>
                 </div>
-              </Panel>
+              </Panel>)
+            }
+             
             </Col>
           </Row>
           <Row gutter={20}>
