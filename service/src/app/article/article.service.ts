@@ -100,4 +100,11 @@ export class ArticleService {
             await this.articleRepository.create(data)
         );
     }
+
+    async update(id:number): Promise<Object> {
+        const article = await this.articleRepository.findOne({ id });
+        article.sortNumber=1
+        article.title="数组常用api使用方式"
+        return await this.articleRepository.save(article);
+    }
 }

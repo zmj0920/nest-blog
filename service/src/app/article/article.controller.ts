@@ -47,7 +47,6 @@ export class ArticleController {
 
   @Post('create')
   async create(@Body() body): Promise<Article|Article[]> {
-    console.log(body)
     const article = new Article();
     if (body) {
       article.title = body.title
@@ -65,5 +64,26 @@ export class ArticleController {
     }
 
     return await this.articleService.save(article);
+  }
+
+  @Post('update')
+  async update(@Body() body): Promise<Object> {
+    console.log(body)
+    const article = new Article();
+    if (body) {
+      article.title = body.title
+      article.articleType = body.articleType
+      article.introduce = body.introduce
+      article.articleContent = body.articleContent
+      article.sortNumber = body.sortNumber
+      article.viewCount = 0;
+      article.addTime = new Date()
+      jwt.verify(body.token, 'aaa', (err: any, decoded) => {
+        if (!err) {
+          article.user = decoded.id
+        }
+      })
+    }
+    return await this.articleService.update(body.id);
   }
 }
