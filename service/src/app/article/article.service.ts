@@ -70,13 +70,18 @@ export class ArticleService {
         );
     }
 
-    async update(id:number,updateInput: Object): Promise<void> {
-        const existing = await this.articleRepository.findOne({ id });
-        if (!existing) throw new HttpException(`更新失败，ID 为 '${id}' 的文章不存在`, 404);
-        console.log(updateInput)
-        // if (updateInput.title) article.title = updateInput.title;
-        // if (updateInput.articleContent) article.articleContent = updateInput.articleContent;
-        // await this.articleRepository.save(article);
+    async update(id:number,updateInput: Article): Promise<void> {
+        console.log(id)
+        const existing = await this.articleRepository.findOne(id);
+        console.log(existing)
+        if (!existing) throw new HttpException(`更新失败，ID 为 '${JSON.stringify(id)}' 的文章不存在`, 404);
+        if (updateInput.title) existing.title = updateInput.title;
+        if (updateInput.articleContent) existing.articleContent = updateInput.articleContent;
+        if (updateInput.articleType) existing.articleType = updateInput.articleType;
+        if (updateInput.introduce) existing.introduce = updateInput.introduce;
+        if (updateInput.sortNumber) existing.sortNumber = updateInput.sortNumber;
+        if (updateInput.addTime) existing.addTime = updateInput.addTime;
+        await this.articleRepository.save(existing);
     }
 
 
