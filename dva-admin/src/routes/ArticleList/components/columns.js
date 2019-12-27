@@ -42,7 +42,7 @@ export default (self, article_type,toolbar) => [
       width: 200,
       align: 'center',
     },
-    formItem: { col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "8" }, xl: { span: "8" }, xxl: { span: "8" } } },
+    formItem: { type: 'number', col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "8" }, xl: { span: "8" }, xxl: { span: "8" } } },
     searchItem: {}
   },
   {

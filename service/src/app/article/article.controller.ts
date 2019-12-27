@@ -1,4 +1,4 @@
-import { Get, Controller, Post, Response, Param, HttpStatus, Request, Body, Put,Delete } from '@nestjs/common';
+import { Get, Controller, Post, HttpException, Param, HttpStatus, Request, Body, Put, Delete } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { Article } from '../entities/article.entity';
 import { ApiTags, ApiHeader, ApiCreatedResponse } from '@nestjs/swagger';
@@ -44,6 +44,7 @@ export class ArticleController {
       article.viewCount = 0;
       article.addTime = new Date()
       jwt.verify(body.token, 'aaa', (err: any, decoded) => {
+        if (!decoded) throw new HttpException(`更新失败，token 为 '${body.token}' 失效`, 404);
         if (!err) {
           article.user = decoded.id
         }
@@ -55,20 +56,14 @@ export class ArticleController {
 
   @Put('update/:id')
   async update(@Param() id: number, @Body() body): Promise<Object> {
-  //  console.log(body)
     const article = new Article();
     if (body) {
-      article.title = body.title
-      article.articleType = body.articleType
-      article.introduce = body.introduce
-      article.articleContent = body.articleContent
-      article.sortNumber = body.sortNumber
+      article.title = body.article_title
+      article.articleType = body.article_type_id
+      article.introduce = body.article_introduce
+      article.articleContent = body.article_articleContent
+      article.sortNumber = body.article_sortNumber
       article.addTime = new Date()
-      jwt.verify(body.token, 'aaa', (err: any, decoded) => {
-        if (!err) {
-          article.user = decoded.id
-        }
-      })
     }
     await this.articleService.update(id, article);
     return { code: 200, message: '更新成功' };
@@ -77,7 +72,7 @@ export class ArticleController {
 
   @Delete('remove/:id')
   async remove(@Param() id: number): Promise<object> {
-      await this.articleService.remove(id);
-      return { code: 200, message: '删除用户成功' };
+    await this.articleService.remove(id);
+    return { code: 200, message: '删除用户成功' };
   }
 }

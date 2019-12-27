@@ -142,7 +142,6 @@ export default class extends BaseComponent {
       // 可以使用主键或是否有record来区分状态
 
       onSubmit: values => {
-        console.log(values)
         if (record) {
           dispatch({
             type: 'articleList/update',

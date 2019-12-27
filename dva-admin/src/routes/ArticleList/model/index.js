@@ -59,13 +59,30 @@ export default modelEnhance({
     },
     // 修改
     *update({ payload }, { call, put, select }) {
-
+      const { record, success,values } = payload;
+      console.log(values)
+      const { pageData } = yield select(state => state.articleList);
+      yield put.resolve({
+        type: '@request',
+        payload: {
+          method: 'PUT',
+          notice: true,
+          url: `article/update/${record.rowKey}`,
+          data:values
+        }
+      })
+      yield put({
+        type: 'getPageList',
+        payload: {
+          pageData: pageData
+        }
+      });
+      success();
     },
     // 删除 之后查询分页
     *remove({ payload }, { call, put, select }) {
       const { records, success } = payload;
       const { pageData } = yield select(state => state.articleList);
-      console.log(pageData)
       yield put.resolve({
         type: '@request',
         payload: {

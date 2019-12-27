@@ -71,9 +71,7 @@ export class ArticleService {
     }
 
     async update(id:number,updateInput: Article): Promise<void> {
-        console.log(id)
         const existing = await this.articleRepository.findOne(id);
-        console.log(existing)
         if (!existing) throw new HttpException(`更新失败，ID 为 '${JSON.stringify(id)}' 的文章不存在`, 404);
         if (updateInput.title) existing.title = updateInput.title;
         if (updateInput.articleContent) existing.articleContent = updateInput.articleContent;
