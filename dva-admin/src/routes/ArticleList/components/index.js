@@ -29,16 +29,16 @@ export default class extends BaseComponent {
   handleDelete = records => {
     const { rows } = this.state;
     this.props.dispatch({
-      type: 'crud/remove',
+      type: 'articleList/remove',
       payload: {
         records,
         success: () => {
           // 如果操作成功，在已选择的行中，排除删除的行
-          this.setState({
-            rows: rows.filter(
-              item => !records.some(jtem => jtem.rowKey === item.rowKey)
-            )
-          });
+          // this.setState({
+          //   rows: rows.filter(
+          //     item => !records.some(jtem => jtem.rowKey === item.rowKey)
+          //   )
+          // });
         }
       }
     });
@@ -178,20 +178,20 @@ export default class extends BaseComponent {
       <Layout className="full-layout articleList-page">
         <Header>
           <Toolbar
-            appendLeft={
-              <Button.Group>
-                <Button type="primary" icon="plus" onClick={this.onAdd}>
-                  新增
-              </Button>
-                <Button
-                  disabled={!rows.length}
-                  onClick={e => this.onDelete(rows)}
-                  icon="delete"
-                >
-                  删除
-              </Button>
-              </Button.Group>
-            }
+            // appendLeft={
+            //   <Button.Group>
+            //     <Button type="primary" icon="plus" onClick={this.onAdd}>
+            //       新增
+            //   </Button>
+            //     <Button
+            //       disabled={!rows.length}
+            //       onClick={e => this.onDelete(rows)}
+            //       icon="delete"
+            //     >
+            //       删除
+            //   </Button>
+            //   </Button.Group>
+            // }
             pullDown={<SearchBar type="grid" {...searchBarProps} />}
           >
             <SearchBar group="abc" {...searchBarProps} />

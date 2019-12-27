@@ -1,4 +1,4 @@
-import { Get, Controller, Post, Response, Param, HttpStatus, Request, Body, Put } from '@nestjs/common';
+import { Get, Controller, Post, Response, Param, HttpStatus, Request, Body, Put,Delete } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { Article } from '../entities/article.entity';
 import { ApiTags, ApiHeader, ApiCreatedResponse } from '@nestjs/swagger';
@@ -72,5 +72,12 @@ export class ArticleController {
     }
     await this.articleService.update(id, article);
     return { code: 200, message: '更新成功' };
+  }
+
+
+  @Delete('remove/:id')
+  async remove(@Param() id: number): Promise<object> {
+      await this.articleService.remove(id);
+      return { code: 200, message: '删除用户成功' };
   }
 }

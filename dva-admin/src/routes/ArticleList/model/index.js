@@ -63,7 +63,24 @@ export default modelEnhance({
     },
     // 删除 之后查询分页
     *remove({ payload }, { call, put, select }) {
-
+      const { records,success } = payload;
+      const { pageData } = yield select(state => state.articleList);
+      console.log(pageData)
+      yield put({
+        type: '@request',
+        payload: {
+          method: 'DELETE',
+          valueField: 'pageData',
+          url: `article/remove/${records[0].rowKey}`
+        }
+      })
+      yield put({
+        type: 'getPageList',
+        payload: {
+          pageData: pageData
+        }
+      });
+      success();
     },
     *article_typeList({ payload }, { call, put }) {
       const data = yield call(articleType, payload)
