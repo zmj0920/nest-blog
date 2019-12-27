@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable,HttpException } from '@nestjs/common';
 import { Article } from '../entities/article.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, createQueryBuilder, getRepository, getConnection } from 'typeorm';
@@ -30,7 +30,7 @@ export class ArticleService {
             .createQueryBuilder(Article, 'article')
             .leftJoinAndSelect(ArticleType, 'article_type', 'article.articleTypeId=article_type.id')
             .leftJoinAndSelect(User, 'user', 'article.userId=user.id')
-            .select(["article.id", "article.title", "article.introduce", "article.articleContent", "article.addTime", "article.viewCount",
+            .select(["article.id", "article.title", "article.introduce","article.sortNumber", "article.articleContent", "article.addTime", "article.viewCount",
                 "article_type.id", "user.name"]).offset((pageNum - 1) * pageSize).limit(pageSize)
             .getRawMany()
         const sum = await this.articleRepository.find();
@@ -70,10 +70,19 @@ export class ArticleService {
         );
     }
 
-    async update(id:number): Promise<Object> {
-        const article = await this.articleRepository.findOne({ id });
-        article.sortNumber=1
-        article.title="数组常用api使用方式"
-        return await this.articleRepository.save(article);
+    async update(id:number,updateInput: Object): Promise<void> {
+        const existing = await this.articleRepository.findOne({ id });
+        if (!existing) throw new HttpException(`更新失败，ID 为 '${id}' 的文章不存在`, 404);
+        console.log(updateInput)
+        // if (updateInput.title) article.title = updateInput.title;
+        // if (updateInput.articleContent) article.articleContent = updateInput.articleContent;
+        // await this.articleRepository.save(article);
+    }
+
+
+    async remove(id: number): Promise<void> {
+        const existing = await this.articleRepository.findOne(id);
+        if (!existing) throw new HttpException(`删除失败，ID 为 '${id}' 的文章不存在`, 404);
+        await this.articleRepository.remove(existing);
     }
 }

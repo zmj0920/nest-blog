@@ -28,6 +28,8 @@ export class UserService {
 
 
     async create(data: User): Promise<User | User[]> {
+        const existing = await this.userRepository.findOne(data.name);
+        if (existing) throw new HttpException('账号已存在', 409);
         return await this.userRepository.save(
             await this.userRepository.create(data)
         );

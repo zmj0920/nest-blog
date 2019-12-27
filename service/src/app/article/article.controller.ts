@@ -1,4 +1,4 @@
-import { Get, Controller, Post, Response, Param, HttpStatus, Request, Body } from '@nestjs/common';
+import { Get, Controller, Post, Response, Param, HttpStatus, Request, Body, Put } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { Article } from '../entities/article.entity';
 import { ApiTags, ApiHeader, ApiCreatedResponse } from '@nestjs/swagger';
@@ -16,7 +16,7 @@ export class ArticleController {
   async findLimit(@Param() params): Promise<Object | Object[]> {
     return await this.articleService.findLimit(params.pageNum, params.pageSize)
   }
-   
+
   @Get("findLimitAll/:pageNum/:pageSize")
   async findLimitAll(@Param() params): Promise<Object | Object[]> {
     return await this.articleService.findLimitAll(params.pageNum, params.pageSize)
@@ -33,7 +33,7 @@ export class ArticleController {
   }
 
   @Post('create')
-  async create(@Body() body): Promise<Article|Article[]> {
+  async create(@Body() body): Promise<Article | Article[]> {
     const article = new Article();
     if (body) {
       article.title = body.title
@@ -53,9 +53,9 @@ export class ArticleController {
     return await this.articleService.save(article);
   }
 
-  @Post('update')
-  async update(@Body() body): Promise<Object> {
-    console.log(body)
+  @Put('update/:id')
+  async update(@Param() id: number, @Body() body): Promise<Object> {
+  //  console.log(body)
     const article = new Article();
     if (body) {
       article.title = body.title
@@ -63,7 +63,6 @@ export class ArticleController {
       article.introduce = body.introduce
       article.articleContent = body.articleContent
       article.sortNumber = body.sortNumber
-      article.viewCount = 0;
       article.addTime = new Date()
       jwt.verify(body.token, 'aaa', (err: any, decoded) => {
         if (!err) {
@@ -71,6 +70,7 @@ export class ArticleController {
         }
       })
     }
-    return await this.articleService.update(body.id);
+    await this.articleService.update(id, article);
+    return { code: 200, message: '更新成功' };
   }
 }

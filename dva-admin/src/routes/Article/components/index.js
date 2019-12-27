@@ -51,6 +51,7 @@ export default class extends BaseComponent {
 
     onSubmit = (values) => {
         const { dispatch } = this.props;
+      
         const article = Object.assign(values, { token: this.state.user.token }, { articleContent: this.state.value })
         dispatch({
             type: 'article/save',
@@ -64,6 +65,7 @@ export default class extends BaseComponent {
         });
     }
     render() {
+        console.log(this.state.user.token)
         const { value } = this.state
         const { article } = this.props
         const columns = createColumns(article);

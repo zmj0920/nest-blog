@@ -13,7 +13,7 @@ export default (self, article_type,toolbar) => [
       align: 'center',
       fixed: 'left',
     },
-    formItem: { col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "12" }, xxl: { span: "12" } } },
+    formItem: { col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "8" }, xl: { span: "8" }, xxl: { span: "8" } } },
     searchItem: {}
   },
   {
@@ -27,7 +27,7 @@ export default (self, article_type,toolbar) => [
       width: 200
     },
     formItem: {
-      col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "12" }, xl: { span: "12" }, xxl: { span: "12" } },
+      col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "8" }, xl: { span: "8" }, xxl: { span: "8" } },
       type: 'select'
     },
     searchItem: {
@@ -35,7 +35,16 @@ export default (self, article_type,toolbar) => [
     }
   },
 
-
+  {
+    title: '排序',
+    name: 'article_sortNumber',
+    tableItem: {
+      width: 200,
+      align: 'center',
+    },
+    formItem: { col: { xs: { span: "24" }, md: { span: "12" }, sm: { span: "24" }, lg: { span: "8" }, xl: { span: "8" }, xxl: { span: "8" } } },
+    searchItem: {}
+  },
   {
     title: '作者',
     name: 'user_name',
