@@ -12,27 +12,15 @@ import * as jwt from "jsonwebtoken";
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) { }
 
-  @Get("find")
-  async find(): Promise<Object | Object[]> {
-    return await this.articleService.find()
-  }
   @Get("findLimit/:pageNum/:pageSize")
   async findLimit(@Param() params): Promise<Object | Object[]> {
     return await this.articleService.findLimit(params.pageNum, params.pageSize)
   }
-
+   
   @Get("findLimitAll/:pageNum/:pageSize")
   async findLimitAll(@Param() params): Promise<Object | Object[]> {
     return await this.articleService.findLimitAll(params.pageNum, params.pageSize)
   }
-
-
-
-  @Get('findOne/:id')
-  async findOne(@Param() params): Promise<Object> {
-    return await this.articleService.findOne(params.id);
-  }
-
 
   @Get('articleDetail/:id')
   async articleDetail(@Param() params): Promise<Object> {
@@ -43,7 +31,6 @@ export class ArticleController {
   async findTypeOne(@Param() params): Promise<Object> {
     return await this.articleService.findTypeOne(params.id, params.pageNum, params.pageSize);
   }
-
 
   @Post('create')
   async create(@Body() body): Promise<Article|Article[]> {

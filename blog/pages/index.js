@@ -82,7 +82,6 @@ const Home = () => {
             />
           </div>
         </Col>
-
         <Col className="comm-right" xs={0} sm={0} md={8} lg={6} xl={5}>
           <Author />
           <Affix offsetTop={60} >
@@ -91,26 +90,8 @@ const Home = () => {
         </Col>
         <BackTop />
       </Row>
-
       <Footer />
-
     </>
   )
-
 }
-
-// Home.getInitialProps = async () => {
-
-//   const articleList = new Promise((resolve) => {
-//     axios(servicePath.getArticleList).then(
-//       (res) => {
-//         resolve(res.data)
-//       }
-//     )
-//   })
-
-//   return await articleList
-// }
-
-
 export default Home

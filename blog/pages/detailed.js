@@ -13,6 +13,7 @@ import Tocify from '../components/tocify.tsx'
 import 'highlightjs/styles/monokai-sublime.css';
 import '../static/style/pages/detailed.css'
 const Detailed = (props) => {
+  console.log(props)
   const tocify = new Tocify()
   const renderer = new marked.Renderer();
   renderer.heading = function (text, level, raw) {
@@ -97,8 +98,7 @@ Detailed.getInitialProps = async (context) => {
   const promise = new Promise((resolve) => {
     axios(servicePath.getArticleById + id).then(
       (res) => {
-        // console.log(title)
-        resolve(res.data.data[0])
+        resolve(res.data[0])
       }
     )
   })
