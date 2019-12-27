@@ -84,7 +84,7 @@ export default {
         pageNum: pageNum,
         pageSize: pageSize,
         total: total,
-        totalPages: total/pageSize,
+        totalPages: Math.ceil(total/pageSize),
         list: data
       };
     }
