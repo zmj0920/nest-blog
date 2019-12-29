@@ -1,4 +1,4 @@
-let ipUrl = 'http://localhost:5000'
+let ipUrl = 'https://nest.521em.cn'
 
 let servicePath = {
     getArticleLimit: ipUrl + '/article/findLimit/',  //  首页文章列表接口
