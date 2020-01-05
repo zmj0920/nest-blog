@@ -59,7 +59,7 @@ export class ArticleService {
                     "article.id": "DESC"
                 })
             .getRawMany();
-        const sum = await this.articleRepository.find();
+        const sum = await this.articleRepository.find({ where: { articleType:id }});
         return { success: 200, total: sum.length, pageNum: pageNum, pageSize: pageSize, data: article };
     }
 
