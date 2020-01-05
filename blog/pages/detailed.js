@@ -13,7 +13,7 @@ import Tocify from '../components/tocify.tsx'
 import 'highlightjs/styles/monokai-sublime.css';
 import '../static/style/pages/detailed.css'
 const Detailed = (props) => {
-  console.log(props)
+ // console.log(props)
   const tocify = new Tocify()
   const renderer = new marked.Renderer();
   renderer.heading = function (text, level, raw) {
@@ -42,7 +42,10 @@ const Detailed = (props) => {
   return (
     <>
       <Head>
-        <title>博客详细页</title>
+        <title> {props.article_title}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="description" content=  {props.article_introduce} />
+        <meta name="keywords" content="前端知识 , Rract , javascript , Angular,Vue, Nest,next" />
       </Head>
       <Header />
       <Row className="comm-main" type="flex" justify="center">

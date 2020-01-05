@@ -43,7 +43,10 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>博客首页</title>
+        <title>技术菜博客-前端博客-前端技术，记录前端开发的技术博客</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="description" content="个人博客。记录本人工作中遇到的问题，以及经验总结和分享！" />
+        <meta name="keywords" content="前端知识 , Rract , javascript , Angular,Vue, Nest,next" />
       </Head>
       <Header />
       <Row className="comm-main" type="flex" justify="center">
