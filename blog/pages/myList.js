@@ -17,14 +17,11 @@ const myList = ({ router }) => {
   const [pageNum, setpageNum] = useState(1);
   const [pageSize, setpageSize] = useState(10);
   const [total, setTotal] = useState(0);
-  const [titleType, setTitle] = useState('');
-  const getArticleLimit = (pageNum, pageSize) => {
-    const articleId=router.query.id
-    axios(`${servicePath.getListById}${articleId}/${pageNum}/${pageSize}`).then(
+  const getArticleLimit = (id,pageNum, pageSize) => {
+  
+    axios(`${servicePath.getListById}${id}/${pageNum}/${pageSize}`).then(
       res => {
         if (res.data.success === 200) {
-          console.log(res)
-          setTitle(res.data.data[0].article_type_typeName)
           setMylist(res.data.data)
           setTotal(res.data.total)
         }
@@ -33,15 +30,15 @@ const myList = ({ router }) => {
   }
 
   useEffect(() => {
-    getArticleLimit(pageNum, pageSize)
-  }, [pageNum, pageSize])
+    getArticleLimit(router.query.id,pageNum, pageSize)
+  }, [router.query.id,pageNum, pageSize])
 
   const onShowSizeChange = (current, pageSize) => {
     setpageSize(pageSize)
   }
   const onChange = (pageNum, pageSize) => {
     if (pageNum) {
-      getArticleLimit(pageNum, pageSize)
+      getArticleLimit(router.query.id,pageNum, pageSize)
     }
   };
 
@@ -58,7 +55,7 @@ const myList = ({ router }) => {
             <div className="bread-div">
               <Breadcrumb>
                 <Breadcrumb.Item><a href="/">首页</a></Breadcrumb.Item>
-                <Breadcrumb.Item>{titleType}</Breadcrumb.Item>
+                <Breadcrumb.Item>{router.query.title}</Breadcrumb.Item>
               </Breadcrumb>
             </div>
 

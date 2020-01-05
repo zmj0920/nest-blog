@@ -33,8 +33,6 @@ const Header = () => {
 
     //跳转到列表页
     const handleClick = ({ item, key}) => {
-        console.log(item.props.title)
-        console.log(key)
         if (key == 0) {
             Router.push('/index')
         } else {
