@@ -18,8 +18,9 @@ const myList = ({ router }) => {
   const [pageSize, setpageSize] = useState(10);
   const [total, setTotal] = useState(0);
   const [titleType, setTitle] = useState('');
-  const getArticleLimit = (id,pageNum, pageSize) => {
-    axios(`${servicePath.getListById}${id}/${pageNum}/${pageSize}`).then(
+  const getArticleLimit = (pageNum, pageSize) => {
+    const articleId=router.query.id
+    axios(`${servicePath.getListById}${articleId}/${pageNum}/${pageSize}`).then(
       res => {
         if (res.data.success === 200) {
           console.log(res)
@@ -32,8 +33,8 @@ const myList = ({ router }) => {
   }
 
   useEffect(() => {
-    getArticleLimit(router.query.id,pageNum, pageSize)
-  }, [router.query.id,,pageNum, pageSize])
+    getArticleLimit(pageNum, pageSize)
+  }, [pageNum, pageSize])
 
   const onShowSizeChange = (current, pageSize) => {
     setpageSize(pageSize)

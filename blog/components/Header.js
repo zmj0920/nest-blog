@@ -32,14 +32,17 @@ const Header = () => {
 
 
     //跳转到列表页
-    const handleClick = (e) => {
-        if (e.key == 0) {
+    const handleClick = ({ item, key}) => {
+        console.log(item.props.title)
+        console.log(key)
+        if (key == 0) {
             Router.push('/index')
         } else {
             Router.push({
                 pathname: '/myList',
                 query: {
-                    id: e.key
+                    id: key,
+                    title:item.props.title
                 }
             })
         }
@@ -76,7 +79,7 @@ const Header = () => {
                         {
                             navArray.map((item) => {
                                 return (
-                                    <Menu.Item key={item.id}>
+                                    <Menu.Item key={item.id} title={item.typeName}>
                                         <Icon type={item.icon} />
                                         {item.typeName}
                                     </Menu.Item>
