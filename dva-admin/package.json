@@ -30,7 +30,7 @@
     "for-editor": "^0.3.5",
     "lazysizes": "^4.0.4",
     "masonry-layout": "^4.2.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "object.omit": "^3.0.0",
     "path-to-regexp": "^2.2.1",
     "react": "^16.2.1",
